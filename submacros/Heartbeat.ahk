@@ -1,4 +1,4 @@
-﻿/*
+/*
 Natro Macro (https://github.com/NatroTeam/NatroMacro)
 Copyright © Natro Team (https://github.com/NatroTeam)
 
@@ -23,7 +23,7 @@ OnMessage(0x5556, nm_SetHeartbeat)
 
 LastRobloxWindow := LastStatusHeartbeat := LastMainHeartbeat := LastBackgroundHeartbeat := nowUnix()
 MacroState := 0
-path := '"' A_AhkPath '" "' A_ScriptDir '\natro_macro.ahk"'
+path := '"' A_AhkPath '" "' A_ScriptDir '\nature_marco.ahk"'
 
 Loop
 {
@@ -33,7 +33,7 @@ Loop
 		LastRobloxWindow := time
 	DetectHiddenWindows 1
 	; request heartbeat
-	if WinExist("natro_macro ahk_class AutoHotkey")
+	if WinExist("nature_marco ahk_class AutoHotkey")
 		PostMessage 0x5556
 	if WinExist("Status.ahk ahk_class AutoHotkey")
 		PostMessage 0x5556
@@ -51,7 +51,7 @@ Loop
 		Prev_MacroState := MacroState, MacroState := 0
 		Loop
 		{
-			while WinExist("natro_macro ahk_class AutoHotkey")
+			while WinExist("nature_marco ahk_class AutoHotkey")
 				ProcessClose WinGetPID()
 			for p in ComObjGet("winmgmts:").ExecQuery("SELECT * FROM Win32_Process WHERE Name LIKE '%Roblox%' OR CommandLine LIKE '%ROBLOXCORPORATION%'")
 				ProcessClose p.ProcessID
@@ -63,7 +63,7 @@ Loop
 			if (WinWait("Natro ahk_class AutoHotkeyGUI", , 300) != 0)
 			{
 				Sleep 2000
-				Send_WM_COPYDATA("Error: " reason "`nSuccessfully restarted macro!", "natro_macro ahk_class AutoHotkey")
+				Send_WM_COPYDATA("Error: " reason "`nSuccessfully restarted macro!", "nature_marco ahk_class AutoHotkey")
 				Sleep 1000
 				LastRobloxWindow := LastStatusHeartbeat := LastMainHeartbeat := LastBackgroundHeartbeat := nowUnix()
 				break
