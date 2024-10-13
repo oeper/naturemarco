@@ -1,4 +1,4 @@
-﻿nm_OpenMenu(tab:="", refresh:=0){
+nm_OpenMenu(tab:="", refresh:=0){
 	global bitmaps
 	static x := Map("itemmenu",30, "questlog",85, "beemenu",140, "badgelist",195, "settingsmenu",250, "shopmenu",305), open:=""
 
