@@ -1,10 +1,10 @@
-﻿/*
+/*
 Natro Macro (https://github.com/NatroTeam/NatroMacro)
 Copyright © Natro Team (https://github.com/NatroTeam)
 
 This file is part of Natro Macro. Our source code will always be open and available.
 
-Natro Macro is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Natro Macro is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the Lib  ense, or (at your option) any later version.
 
 Natro Macro is distributed in the hope that it will be useful. This does not give you the right to steal sections from our code, distribute it under your own name, then slander the macro.
 
@@ -27,7 +27,7 @@ SetWorkingDir A_ScriptDir "\.."
 
 if (A_Args.Length = 0)
 {
-	msgbox "This script needs to be run by Natro Macro! You are not supposed to run it manually."
+	msgbox "This script needs to be run by nature marco! You are not supposed to run it manually."
 	ExitApp
 }
 
