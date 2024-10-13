@@ -16,7 +16,7 @@ set reset=%\e%[0m
 
 :: check existence of command line parameters
 if [%1]==[] (
-    echo %red%This script must be run from Natro Macro^^!%reset%
+    echo %red%This script must be run from nature marco^^!%reset%
     <nul set /p "=%red%Press any key to exit . . . %reset%"
     pause >nul
     exit
@@ -102,7 +102,7 @@ echo %green%Update complete^^! Starting Natro Macro in 10 seconds.%reset%
 <nul set /p =%green%Press any key to skip . . . %reset%
 timeout /t 10 >nul
 
-start "" "!folder!\submacros\AutoHotkey32.exe" "!folder!\submacros\natro_macro.ahk"
+start "" "!folder!\submacros\nmhk32.exe" "!folder!\submacros\nature_marco.ahk"
 exit)
 
 ----- Begin wsf script --->
