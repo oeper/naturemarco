@@ -1,8 +1,8 @@
-﻿/*
+/*
 Natro Macro (https://github.com/NatroTeam/NatroMacro)
 Copyright © Natro Team (https://github.com/NatroTeam)
 
-This file is part of Natro Macro. Our source code will always be open and available.
+This file is part of nature marco. Our source code will always be open and available.
 
 Natro Macro is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
@@ -17,7 +17,7 @@ You should have received a copy of the license along with Natro Macro. If not, p
 ;@Ahk2Exe-SetDescription Natro Macro
 ;@Ahk2Exe-SetCompanyName Natro Team
 ;@Ahk2Exe-SetCopyright Copyright © Natro Team
-;@Ahk2Exe-SetOrigFilename natro_macro.exe
+;@Ahk2Exe-SetOrigFilename nature_marco.exe
 
 #MaxThreads 255
 #Requires AutoHotkey v2.0
@@ -44,7 +44,7 @@ RunWith32() {
 	if (A_PtrSize != 4) {
 		SplitPath A_AhkPath, , &ahkDirectory
 
-		if !FileExist(ahkPath := ahkDirectory "\AutoHotkey32.exe")
+		if !FileExist(ahkPath := ahkDirectory "\nmhk32.exe")
 			MsgBox "Couldn't find the 32-bit version of Autohotkey in:`n" ahkPath, "Error", 0x10
 		else
 			ReloadScript(ahkpath)
@@ -67,11 +67,11 @@ ElevateScript() {
 		if (!A_IsAdmin || !(DllCall("GetCommandLine","Str") ~= " /restart(?!\S)"))
 			Try RunWait '*RunAs "' A_AhkPath '" /script /restart "' A_ScriptFullPath '"'
 		if !A_IsAdmin {
-			MsgBox "You must run Natro Macro as administrator in this folder!`nIf you don't want to do this, move the macro to a different folder (e.g. Downloads, Desktop)", "Error", 0x40010
+			MsgBox "You must run nature marco as administrator in this folder!`nIf you don't want to do this, move the macro to a different folder (e.g. Downloads, Desktop)", "Error", 0x40010
 			ExitApp
 		}
 		; elevated but still can't write, read-only directory?
-		MsgBox "You cannot run Natro Macro in this folder!`nTry moving the macro to a different folder (e.g. Downloads, Desktop)", "Error", 0x40010
+		MsgBox "You cannot run nature marco in this folder!`nTry moving the macro to a different folder (e.g. Downloads, Desktop)", "Error", 0x40010
 	}
 	else
 		file.Close()
@@ -80,7 +80,7 @@ ElevateScript()
 
 ; declare executable paths
 exe_path32 := A_AhkPath
-exe_path64 := (A_Is64bitOS && FileExist("submacros\AutoHotkey64.exe")) ? (A_WorkingDir "\submacros\AutoHotkey64.exe") : A_AhkPath
+exe_path64 := (A_Is64bitOS && FileExist("submacros\nmhk64.exe")) ? (A_WorkingDir "\submacros\nmhk64.exe") : A_AhkPath
 
 ; close any remnant running natro scripts and start heartbeat
 CloseScripts(hb:=0) {
@@ -108,8 +108,8 @@ OnMessage(0x5556, nm_sendHeartbeat)
 OnMessage(0x5557, nm_ForceReconnect)
 OnMessage(0x5558, nm_AmuletPrompt)
 
-; set version identifier
-VersionID := "1.0.0.2"
+; set version identifier id
+VersionID := "69420.1"
 
 ;initial load warnings
 if (A_ScreenDPI != 96)
@@ -2088,8 +2088,6 @@ nm_AutoUpdateHandler(req)
 			MainGui["ImageUpdateLink"].Visible := 1
 			VersionWidth += 16
 			MainGui["VersionText"].Move(494 - VersionWidth), MainGui["VersionText"].Redraw()
-			MainGui["ImageGitHubLink"].Move(494 - VersionWidth - 23), MainGui["ImageGitHubLink"].Redraw()
-			MainGui["ImageDiscordLink"].Move(494 - VersionWidth - 48), MainGui["ImageDiscordLink"].Redraw()
 			try MainGui["SecretButton"].Move(494-VersionWidth-104), MainGui["SecretButton"].Redraw()
 
 			if (LatestVer != IgnoreUpdateVersion)
@@ -2106,13 +2104,13 @@ nm_AutoUpdateGUI(*)
 			UpdateGui.Destroy(), UpdateGui := ""
 	}
 	GuiClose()
-	UpdateGui := Gui("+Border +Owner" MainGui.Hwnd " -MinimizeBox", "Natro Macro Update")
+	UpdateGui := Gui("+Border +Owner" MainGui.Hwnd " -MinimizeBox", "nature marco Update")
 	UpdateGui.OnEvent("Close", GuiClose), UpdateGui.OnEvent("Escape", GuiClose)
 	UpdateGui.SetFont("s9 cDefault Norm", "Tahoma")
-	UpdateText := UpdateGui.Add("Text", "x20 w260 +Center +BackgroundTrans", "A newer version of Natro Macro was found!`nDo you want to update now?")
+	UpdateText := UpdateGui.Add("Text", "x20 w260 +Center +BackgroundTrans", "A newer version of nature marco was found!`nDo you want to update now?")
 
-	posW := TextExtent("Natro Macro v" VersionID " ⮕ v" LatestVer, UpdateText)
-	UpdateGui.Add("Text", "x" 149-posW//2 " y40 +BackgroundTrans", "Natro Macro v" VersionID " ⮕ ")
+	posW := TextExtent("nature marco v" VersionID " ⮕ v" LatestVer, UpdateText)
+	UpdateGui.Add("Text", "x" 149-posW//2 " y40 +BackgroundTrans", "nature marco v" VersionID " ⮕ ")
 	UpdateGui.Add("Text", "x+0 yp +c379e37 +BackgroundTrans", "v" LatestVer)
 
 	posW := TextExtent((size := Round(latest_release["assets"][1]["size"]/1048576, 2)) " MB // Downloads: " (downloads := latest_release["assets"][1]["download_count"]), UpdateText)
@@ -2232,7 +2230,7 @@ nm_MajorUpdateHelp(*)
 {
 	MsgBox "v" VersionID " to v" LatestVer " is a major version update.`n`n"
 	. "This means that backward compatibility of Paths and Patterns cannot be guaranteed, so they cannot be automatically copied.`n"
-	. "However, in Natro Macro, your Settings are guaranteed to be transferable to any new version, so that option remains enabled.`n`n"
+	. "However, in nature marco, your Settings are guaranteed to be transferable to any new version, so that option remains enabled.`n`n"
 	. "For more information, you can review the convention at https://semver.org/", "Major Update", 0x1040
 }
 
@@ -2240,10 +2238,10 @@ nm_MajorUpdateHelp(*)
 ; CREATE GUI
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 OnExit(GetOut)
-MainGui := Gui((AlwaysOnTop ? "+AlwaysOnTop " : "") "+Border +OwnDialogs", "Natro Macro (Loading 0%)")
+MainGui := Gui((AlwaysOnTop ? "+AlwaysOnTop " : "") "+Border +OwnDialogs", "nature marco (Loading 0%)")
 WinSetTransparent 255-floor(GuiTransparency*2.55), MainGui
 MainGui.Show("x" GuiX " y" GuiY " w490 h275")
-SetLoadingProgress(percent) => MainGui.Title := "Natro Macro (Loading " Round(percent) "%)"
+SetLoadingProgress(percent) => MainGui.Title := "nature marco (Loading " Round(percent) "%)"
 MainGui.OnEvent("Close", (*) => ExitApp())
 MainGui.SetFont("s8 cDefault Norm", "Tahoma")
 MainGui.SetFont("w700")
@@ -2450,21 +2448,13 @@ SetLoadingProgress(26)
 ; ------------------------
 TabCtrl.UseTab("Credits")
 MainGui.Add("Picture", "+BackgroundTrans vContributorsDevImage x5 y24 AltSubmit")
-MainGui.Add("Picture", "+BackgroundTrans vContributorsImage x253 y24 AltSubmit")
 
 MainGui.SetFont("w700")
-MainGui.Add("Text", "x15 y28 w225 +wrap +backgroundtrans cWhite", "Development")
-MainGui.Add("Text", "x261 y28 w225 +wrap +backgroundtrans cWhite", "Supporters")
+MainGui.Add("Text", "x15 y28 w225 +wrap +backgroundtrans cBlack", "note")
 
 MainGui.SetFont("s8 cDefault Norm", "Tahoma")
-MainGui.Add("Text", "x18 y43 w225 +wrap +backgroundtrans cWhite", "Special Thanks to the developers and testers!`nClick the names to view their Discord profiles!")
-MainGui.Add("Text", "x264 y43 w180 +wrap +backgroundtrans cWhite", "Thank you for your donations and contributions to this project!")
+MainGui.Add("Text", "x18 y43 w225 +wrap +backgroundtrans cBlack", "just a crappy natro macro distro `nshoutout to natro macro for the original thing and me for stealing stuff (this was just meant for me (oeper) so im not gonna really distribute this or anything")
 
-MainGui.Add("Button", "x440 y46 w18 h18 vContributorsLeft Disabled", "<").OnEvent("Click", nm_ContributorsPageButton)
-MainGui.Add("Button", "x464 y46 w18 h18 vContributorsRight Disabled", ">").OnEvent("Click", nm_ContributorsPageButton)
-
-try AsyncHttpRequest("GET", "https://raw.githubusercontent.com/NatroTeam/.github/main/data/contributors.txt", nm_ContributorsHandler, Map("accept", "application/vnd.github.v3.raw"))
-SetLoadingProgress(27)
 
 ; MISC TAB
 ; ------------------------
@@ -2475,8 +2465,6 @@ MainGui.Add("GroupBox", "x5 y168 w160 h62", "Other Tools")
 MainGui.Add("GroupBox", "x170 y24 w160 h144", "Calculators")
 MainGui.Add("GroupBox", "x170 y168 w160 h62 vAutoClickerButton", "AutoClicker (" AutoClickerHotkey ")")
 MainGui.Add("GroupBox", "x335 y24 w160 h84", "Macro Tools")
-MainGui.Add("GroupBox", "x335 y108 w160 h60", "Discord Tools")
-MainGui.Add("GroupBox", "x335 y168 w160 h62", "Bugs and Suggestions")
 MainGui.SetFont("s9 cDefault Norm", "Tahoma")
 ;hive tools
 MainGui.Add("Button", "x10 y40 w150 h40 vBasicEggHatcherButton Disabled", "Gifted Basic Bee`nAuto-Hatcher").OnEvent("Click", nm_BasicEggHatcher)
@@ -2497,8 +2485,6 @@ MainGui.Add("Button", "x340 y84 w150 h20 vAutoStartManagerGUI Disabled", "Auto-S
 ;discord tools
 MainGui.Add("Button", "x340 y124 w150 h40 vNightAnnouncementGUI Disabled", "Night Detection`nAnnouncement").OnEvent("Click", nm_NightAnnouncementGUI)
 ;reporting
-MainGui.Add("Button", "x340 y184 w150 h20 vReportBugButton Disabled", "Report Bugs").OnEvent("Click", nm_ReportBugButton)
-MainGui.Add("Button", "x340 y206 w150 h20 vMakeSuggestionButton Disabled", "Make Suggestions").OnEvent("Click", nm_MakeSuggestionButton)
 MainGui.SetFont("s8 cDefault Norm", "Tahoma")
 
 ; STATUS TAB
@@ -2538,12 +2524,7 @@ MainGui.Add("GroupBox", "x335 y25 w160 h210", "Character")
 MainGui.SetFont("s8 cDefault Norm", "Tahoma")
 
 ;gui settings
-MainGui.Add("CheckBox", "x10 y73 Disabled vAlwaysOnTop Checked" AlwaysOnTop, "Always On Top").OnEvent("Click", nm_AlwaysOnTop)
-MainGui.Add("Text", "x10 y40 w70 +BackgroundTrans", "GUI Theme:")
-StylesList := []
-Loop Files A_WorkingDir "\nm_image_assets\Styles\*.msstyles"
-	StylesList.Push(StrReplace(A_LoopFileName, ".msstyles"))
-(GuiCtrl := MainGui.Add("DropDownList", "x75 y34 w72 h100 vGuiTheme Disabled", StylesList)).Text := GuiTheme, GuiCtrl.OnEvent("Change", nm_guiThemeSelect)
+MainGui.Add("CheckBox", "x10 y40 Disabled vAlwaysOnTop Checked" AlwaysOnTop, "Always On Top").OnEvent("Click", nm_AlwaysOnTop)
 MainGui.Add("Text", "x10 y57 w100 +BackgroundTrans", "GUI Transparency:")
 MainGui.Add("Text", "x104 y57 w20 +Center +BackgroundTrans vGuiTransparency", GuiTransparency)
 MainGui.Add("UpDown", "xp+22 yp-1 h16 -16 Range0-14 vGuiTransparencyUpDown Disabled", GuiTransparency//5).OnEvent("Change", nm_guiTransparencySet)
@@ -2595,12 +2576,12 @@ MainGui.SetFont("s6 w700")
 MainGui.Add("Text", "x295 yp+6 +BackgroundTrans", "UTC")
 MainGui.SetFont("s8 cDefault Norm", "Tahoma")
 MainGui.Add("Button", "x315 yp-3 w10 h15 vReconnectTimeHelp Disabled", "?").OnEvent("Click", nm_ReconnectTimeHelp)
-(GuiCtrl := MainGui.Add("CheckBox", "x176 yp+24 w88 h15 vReconnectMessage Disabled Checked" ReconnectMessage, "Natro so broke")).Section := "Settings", GuiCtrl.OnEvent("Click", nm_saveConfig)
-hBM := Gdip_CreateHBITMAPFromBitmap(bitmaps["weary"])
+(GuiCtrl := MainGui.Add("CheckBox", "x176 yp+24 w88 h15 vReconnectMessage Disabled Checked" ReconnectMessage, "my marco sux😭")).Section := "Settings", GuiCtrl.OnEvent("Click", nm_saveConfig)
+hBM := Gdip_CreateHBITMAPFromBitmap(bitmaps["sob"])
 MainGui.Add("Picture", "+BackgroundTrans x269 yp-2 w20 h20", "HBITMAP:*" hBM)
 DllCall("DeleteObject", "ptr", hBM)
 Gdip_DisposeImage(bitmaps["weary"])
-MainGui.Add("Button", "x315 yp+2 w10 h15 vNatroSoBrokeHelp Disabled", "?").OnEvent("Click", nm_NatroSoBrokeHelp)
+MainGui.Add("Button", "x315 yp+2 w10 h15 vMyMacroSoBrokeHelp Disabled", "?").OnEvent("Click", nm_NatroSoBrokeHelp)
 (GuiCtrl := MainGui.Add("CheckBox", "x176 yp+18 w132 h15 vPublicFallback Disabled Checked" PublicFallback, "Fallback to Public Server")).Section := "Settings", GuiCtrl.OnEvent("Click", nm_saveConfig)
 MainGui.Add("Button", "x315 yp w10 h15 vPublicFallbackHelp Disabled", "?").OnEvent("Click", nm_PublicFallbackHelp)
 
@@ -3197,7 +3178,7 @@ SetLoadingProgress(100)
 nm_LockTabs(0)
 nm_setStatus("Startup", "UI")
 TabCtrl.Focus()
-MainGui.Title := "Natro Macro"
+MainGui.Title := "nature marco"
 MainGui["StartButton"].Enabled := 1
 MainGui["PauseButton"].Enabled := 1
 MainGui["StopButton"].Enabled := 1
@@ -3250,7 +3231,7 @@ nm_saveGUIPos(){
 
 ;tab (un)lock
 nm_LockTabs(lock:=1){
-	static tabs := ["Gather","Collect","Boost","Quests","Planters","Status","Settings","Misc"]
+	static tabs := ["Gather","Collect","Boost","Quests","Planters","Status","Settings","Misc","Credits"]
 	global bitmaps
 
 	;controls outside tabs
@@ -3260,12 +3241,6 @@ nm_LockTabs(lock:=1){
 		MainGui["CurrentFieldDown"].Enabled := 0
 		try MainGui["SecretButton"].Enabled := 0
 
-		pBM := Gdip_BitmapConvertGray(bitmaps["discordgui"]), hBM := Gdip_CreateHBITMAPFromBitmap(pBM)
-		MainGui["ImageDiscordLink"].Value := "HBITMAP:*" hBM, MainGui["ImageDiscordLink"].OnEvent("Click", DiscordLink, 0)
-		Gdip_DisposeImage(pBM), DllCall("DeleteObject", "Ptr", hBM)
-
-		MainGui["ImageGitHubLink"].OnEvent("Click", GitHubRepoLink, 0)
-
 		c := "Lock"
 	}
 	else
@@ -3274,11 +3249,7 @@ nm_LockTabs(lock:=1){
 		MainGui["CurrentFieldDown"].Enabled := 1
 		try MainGui["SecretButton"].Enabled := 1
 
-		hBM := Gdip_CreateHBITMAPFromBitmap(bitmaps["discordgui"])
-		MainGui["ImageDiscordLink"].Value := "HBITMAP:*" hBM, MainGui["ImageDiscordLink"].OnEvent("Click", DiscordLink)
-		DllCall("DeleteObject", "Ptr", hBM)
 
-		MainGui["ImageGitHubLink"].OnEvent("Click", GitHubRepoLink)
 
 		c := "UnLock"
 	}
@@ -4036,15 +4007,6 @@ nm_saveConfig(GuiCtrl, *){
 }
 
 ;link buttons
-DiscordLink(*){
-	nm_RunDiscord("invite/xbkXjwWh8U")
-}
-GitHubRepoLink(*){
-	Run "https://github.com/NatroTeam/NatroMacro"
-}
-GitHubReleaseLink(*){
-	Run "https://github.com/NatroTeam/NatroMacro/releases"
-}
 nm_RunDiscord(path){
 	static cmd := Buffer(512), init := (DllCall("shlwapi\AssocQueryString", "Int",0, "Int",1, "Str","discord", "Str","open", "Ptr",cmd.Ptr, "IntP",512),
 		DllCall("Shell32\SHEvaluateSystemCommandTemplate", "Ptr",cmd.Ptr, "PtrP",&pEXE:=0,"Ptr",0,"PtrP",&pPARAMS:=0))
@@ -4387,10 +4349,7 @@ nm_FDCHelp(*){
 	MsgBox "
 	(
 	DESCRIPTION:
-	Field Drift Compensation is a way to stop what we call field drift (AKA falling/running out of the field.)
-	Enabling this checkbox will re-align you to your saturator every so often by searching for the neon blue pixel and moving towards it.
-
-	Note that this feature requires The Supreme Saturator, otherwise you will drift more. If you would like more info, join our Discord.
+	self explanatory (supreme saturator required because neon cant be recoloured by the surrounding stuff)
 	)", "Field Drift Compensation", 0x40000
 }
 nm_FieldPatternSize(GuiCtrl, *){
@@ -7086,7 +7045,7 @@ nm_WebhookGUI(*){
 		global
 		local v := %var%
 		IniWrite v, "settings\nm_config.ini", "Status", var
-		if WinExist("natro_macro.ahk ahk_class AutoHotkey")
+		if WinExist("nature_marco.ahk ahk_class AutoHotkey")
 			PostMessage 0x5552, enum[var], v
 		if WinExist("Status.ahk ahk_class AutoHotkey")
 			PostMessage 0x5552, enum[var], v
@@ -7096,7 +7055,7 @@ nm_WebhookGUI(*){
 	{
 		global
 		IniWrite %var%, "settings\nm_config.ini", "Status", var
-		if WinExist("natro_macro.ahk ahk_class AutoHotkey")
+		if WinExist("nature_marco.ahk ahk_class AutoHotkey")
 			PostMessage 0x5553, str_enum[var], 7
 		if WinExist("Status.ahk ahk_class AutoHotkey")
 			PostMessage 0x5553, str_enum[var], 7
@@ -7485,8 +7444,8 @@ nm_NatroSoBrokeHelp(*){ ; so broke information
 	MsgBox "
 	(
 	DESCRIPTION:
-	Enable this to have the macro say 'Natro so broke :weary:' in chat after it reconnects! This is a reference to e_lol's macros which type 'e_lol so pro :weary:' in chat.
-	)", "Natro so broke :weary:", 0x40000
+	if you hate this marco or whatever
+	)", "", 0x40000
 }
 nm_PublicFallbackHelp(*){ ; public fallback information
 	MsgBox "
@@ -8186,11 +8145,11 @@ nm_AutoStartManager(*){
 	if A_IsAdmin
 		MsgBox "
 		(
-		Natro Macro has been run as administrator!
-		Auto-Start Manager can only launch Natro Macro on logon without admin privileges.
+		nature marco has been run as administrator!
+		Auto-Start Manager can only launch nature marco on logon without admin privileges.
 
-		If you need to run Natro Macro as admin, either:
-		- fix the reason why admin is required (reinstall Roblox unelevated, move Natro Macro folder)
+		If you need to run nature marco as admin, either:
+		- fix the reason why admin is required (reinstall Roblox unelevated, move nature marco folder)
 		- manually set up a Scheduled Task in Task Scheduler with 'Run with highest privileges' checked
 		- disable UAC (not recommended at all!)
 		)", "Auto-Start Manager", 0x40030 " T120 Owner" MainGui.Hwnd
@@ -8225,11 +8184,11 @@ nm_AutoStartManager(*){
 	CenterText(ASMGui["StatusLabel"], ASMGui["StatusVal"], ASMGui["StatusLabel"])
 	ASMGui.SetFont("s9 cDefault Bold", "Tahoma")
 	ASMGui.Add("Text", "x0 y24 w" w " h36 vStatusText +Center c" ((status > 0) ? "Red" : "Green")
-		, ((status = 0) ? "Natro Macro will automatically start on user login using the settings below:"
-		: (status = 1) ? "No Natro Macro auto-start found!`nUse the 'Add' button below."
+		, ((status = 0) ? "nature marco will automatically start on user login using the settings below:"
+		: (status = 1) ? "No nature marco auto-start found!`nUse the 'Add' button below."
 		: "Your auto-start needs updating!`nUse 'Add' to create a new auto-start."))
 
-	ASMGui.Add("Text", "x0 yp+34 vNTLabel", "Natro Macro Path: ")
+	ASMGui.Add("Text", "x0 yp+34 vNTLabel", "nature marco Path: ")
 	ASMGui.Add("Text", "x0 yp vNTVal c" ((validScript) ? "Green" : "Red"), (status = 1) ? "None" : (validScript) ? "Valid" : "Invalid")
 	CenterText(ASMGui["NTLabel"], ASMGui["NTVal"], ASMGui["StatusText"])
 	ASMGui.Add("Text", "x0 yp+16 vASLabel", "Start Macro On Run: ")
@@ -8259,7 +8218,7 @@ AddButton(*)
 	local task, autostart, secs
 
 	if (task := RegRead("HKCU\Software\Microsoft\Windows\CurrentVersion\Run", "NatroMacro", ""))
-		if (MsgBox("Are you sure?`nThis will overwrite the existing Natro Macro auto-start!", "Overwrite Existing Entry", 0x40024 " T30 Owner" ASMGui.Hwnd) != "Yes")
+		if (MsgBox("Are you sure?`nThis will overwrite the existing nature marco auto-start!", "Overwrite Existing Entry", 0x40024 " T30 Owner" ASMGui.Hwnd) != "Yes")
 			return
 
 	autostart := ASMGui["AutoStartCheck"].Value
@@ -8274,7 +8233,7 @@ AddButton(*)
 	ASMGui["Delay"].Text := "Delay Duration: " ((secs > 0) ? hmsFromSeconds(secs) : "None")
 	ASMGui["StatusVal"].SetFont("cGreen", "Tahoma"), ASMGui["StatusVal"].Text := "Active"
 	CenterText(ASMGui["StatusLabel"], ASMGui["StatusVal"], ASMGui["StatusLabel"])
-	ASMGui["StatusText"].SetFont("cGreen"), ASMGui["StatusText"].Text := "Natro Macro will automatically start on user login using the settings below:"
+	ASMGui["StatusText"].SetFont("cGreen"), ASMGui["StatusText"].Text := "nature marco will automatically start on user login using the settings below:"
 	ASMGui["NTVal"].SetFont("cGreen"), ASMGui["NTVal"].Text := "Valid"
 	CenterText(ASMGui["NTLabel"], ASMGui["NTVal"], ASMGui["StatusText"])
 	ASMGui["ASVal"].SetFont((autostart = 1) ? "cGreen" : "cRed"), ASMGui["ASVal"].Text := (autostart = 1) ? "Enabled" : "Disabled"
@@ -8294,7 +8253,7 @@ RemoveButton(*)
 		ASMGui["Delay"].Text := "Delay Duration: None"
 		ASMGui["StatusVal"].SetFont("cRed", "Tahoma"), ASMGui["StatusVal"].Text := "Inactive"
 		CenterText(ASMGui["StatusLabel"], ASMGui["StatusVal"], ASMGui["StatusLabel"])
-		ASMGui["StatusText"].SetFont("cRed"), ASMGui["StatusText"].Text := "No Natro Macro auto-start found!`nUse the 'Add' button below."
+		ASMGui["StatusText"].SetFont("cRed"), ASMGui["StatusText"].Text := "No nature marco auto-start found!`nUse the 'Add' button below."
 		ASMGui["NTVal"].SetFont("cRed"), ASMGui["NTVal"].Text := "None"
 		CenterText(ASMGui["NTLabel"], ASMGui["NTVal"], ASMGui["StatusText"])
 		ASMGui["ASVal"].SetFont("cRed"), ASMGui["ASVal"].Text := "None"
@@ -15035,7 +14994,7 @@ nm_Walk(tiles, MoveKey1, MoveKey2:=0){ ; string form of the function which holds
 }
 nm_createWalk(movement, name:="", vars:="") ; this function generates the 'walk' code and runs it for a given 'movement' (AHK code string), using movespeed correction if 'NewWalk' is enabled and legacy movement otherwise
 {
-	; F13 is used by 'natro_macro.ahk' to tell 'walk' to complete a cycle
+	; F13 is used by 'nature_marco.ahk' to tell 'walk' to complete a cycle
 	; F14 is held down by 'walk' to indicate that the cycle is in progress, then released when the cycle is finished
 	; F16 can be used by any script to pause / unpause the walk script, when unpaused it will resume from where it left off
 
@@ -16228,10 +16187,10 @@ nm_claimHiveSlot(){
 	MainGui["HiveSlot"].Text := HiveSlot
 	IniWrite HiveSlot, "settings\nm_config.ini", "Settings", "HiveSlot"
 	nm_setStatus("Claimed", "Hive Slot " . HiveSlot)
-	;;;;; Natro so broke :weary:
+	;;;;; my marco sux😭
 	if(ReconnectMessage && ((nowUnix()-LastNatroSoBroke)>3600)) { ;limit to once per hour
 		LastNatroSoBroke:=nowUnix()
-		Send "{Text}/[" A_Hour ":" A_Min "] Natro so broke :weary:`n"
+		Send "{Text}/[" A_Hour ":" A_Min "] my marco sux😭`n"
 		sleep 250
 	}
 	MouseMove windowX+350, windowY+offsetY+100
@@ -20667,7 +20626,7 @@ start(*){
 		(
 		Your Roblox window is run as admin, but the macro is not!
 		This means the macro will be unable to send any inputs to Roblox.
-		You must either reinstall Roblox without administrative rights, or run Natro Macro as admin!
+		You must either reinstall Roblox without administrative rights, or run nature marco as admin!
 
 		NOTE: It is recommended to stop the macro now, as this issue also causes hotkeys to not work while Roblox is active."
 		)", "WARNING!!", 0x1030 " T60"
