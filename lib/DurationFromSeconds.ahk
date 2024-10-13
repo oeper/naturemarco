@@ -1,4 +1,4 @@
-﻿/*****************************************************************************************
+/*****************************************************************************************
 * @description: Simple GetDurationFormatEx parser
 * https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getdurationformatex
 * @author SP
