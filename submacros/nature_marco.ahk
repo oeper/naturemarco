@@ -2196,7 +2196,7 @@ nm_UpdateButton(*)
 		try
 		{
 			wr := ComObject("WinHttp.WinHttpRequest.5.1")
-			wr.Open("GET", "https://api.github.com/repos/NatroTeam/NatroMacro/tags?per_page=100", 1)
+			wr.Open("GET", "https://api.github.com/repos/oeper/naturemarco/tags?per_page=100", 1)
 			wr.SetRequestHeader("accept", "application/vnd.github+json")
 			wr.Send()
 			wr.WaitForResponse()
@@ -2207,7 +2207,7 @@ nm_UpdateButton(*)
 				throw
 
 			wr := ComObject("WinHttp.WinHttpRequest.5.1")
-			wr.Open("GET", "https://api.github.com/repos/NatroTeam/NatroMacro/compare/" base "..." latest_release["tag_name"] , 1)
+			wr.Open("GET", "https://api.github.com/repos/oeper/naturemarco/compare/" base "..." latest_release["tag_name"] , 1)
 			wr.SetRequestHeader("accept", "application/vnd.github+json")
 			wr.Send()
 			wr.WaitForResponse()
@@ -2279,7 +2279,7 @@ TabArr := ["Gather","Collect/Kill","Boost","Quests","Planters","Status","Setting
 (TabCtrl := MainGui.Add("Tab", "x0 y-1 w500 h240 -Wrap", TabArr)).OnEvent("Change", (*) => TabCtrl.Focus())
 SendMessage 0x1331, 0, 20, , TabCtrl ; set minimum tab width
 ; check for update
-try AsyncHttpRequest("GET", "https://api.github.com/repos/NatroTeam/NatroMacro/releases/latest", nm_AutoUpdateHandler, Map("accept", "application/vnd.github+json"))
+try AsyncHttpRequest("GET", "https://api.github.com/repos/oeper/naturemarco/releases/latest", nm_AutoUpdateHandler, Map("accept", "application/vnd.github+json"))
 ; open Timers
 if (TimersOpen = 1)
 	run '"' exe_path32 '" /script "' A_WorkingDir '\submacros\PlanterTimers.ahk"'
@@ -8366,10 +8366,10 @@ nm_NightAnnouncementHelp(*){
 	)", "Announce Night Detection", 0x40000
 }
 nm_ReportBugButton(*){
-	Run "https://github.com/NatroTeam/NatroMacro/issues/new?assignees=&labels=bug%2Cneeds+triage&projects=&template=bug.yml"
+	Run "https://github.com/oeper/naturemarco/issues/new?assignees=&labels=bug%2Cneeds+triage&projects=&template=bug.yml"
 }
 nm_MakeSuggestionButton(*){
-	Run "https://github.com/NatroTeam/NatroMacro/issues/new?assignees=&labels=suggestion%2Cneeds+triage&projects=&template=suggestion.yml"
+	Run "https://github.com/oeper/naturemarco/issues/new?assignees=&labels=suggestion%2Cneeds+triage&projects=&template=suggestion.yml"
 }
 
 ; CREDITS TAB
