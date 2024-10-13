@@ -5,15 +5,15 @@ chcp 65001 > nul
 cd %~dp0
 
 :: IF script and executable exist, run the macro
-if exist "submacros\natro_macro.ahk" (
-	if exist "submacros\AutoHotkey32.exe" (
+if exist "submacros\nature_marco.ahk" (
+	if exist "submacros\nmhk32.exe" (
 		if not [%~3]==[] (
 			set /a "delay=%~3" 2>nul
-			echo Starting Natro Macro in !delay! seconds.
+			echo Starting nature marco in !delay! seconds.
 			<nul set /p =Press any key to skip . . . 
 			timeout /t !delay! >nul
 		)
-		start "" "%~dp0submacros\AutoHotkey32.exe" "%~dp0submacros\natro_macro.ahk" %*
+		start "" "%~dp0submacros\nmhk32.exe" "%~dp0submacros\nature_marco.ahk" %*
 		exit
 	) else (set "exe_missing=1")
 )
@@ -28,14 +28,14 @@ set yellow=%\e%[93m
 set reset=%\e%[0m
 
 if "%exe_missing%" == "1" (
-	echo %red%Could not find submacros\AutoHotkey32.exe^^!%reset%
+	echo %red%Could not find submacros\nmhk32.exe^^!%reset%
 	echo %red%This is most likely due to a third-party antivirus deleting the file:%reset%
-	echo %red% 1. Disable any third-party antivirus software ^(or add the Natro Macro folder as an exception^)%reset%
-	echo %red% 2. Re-extract the macro and check that AutoHotkey32.exe exists in 'submacros' folder%reset%
+	echo %red% 1. Disable any third-party antivirus software ^(or add the nature marco folder as an exception^)%reset%
+	echo %red% 2. Re-extract the macro and check that nmhk32.exe exists in 'submacros' folder%reset%
 	echo %red% 3. Run START.bat%reset%
 	echo:
-	echo %red%Note: Both Natro Macro and AutoHotkey are safe and work fine with Microsoft Defender^^!%reset%
-	echo %red%Join our Discord server for support: discord.gg/natromacro%reset%
+	echo %red%Note: Both nature marco and AutoHotkey are safe and work fine with Microsoft Defender^^!%reset%
+	echo %red%Join our Discord server for support: there is no discord server...
 	echo:
 	<nul set /p "=%red%Press any key to exit . . . %reset%"
 	pause >nul
@@ -51,7 +51,7 @@ if not [!grandparent!] == [] (
 		if not [!zip!] == [] (
 			echo %cyan%Looking for !zip!...%reset%
 			cd %USERPROFILE%
-			for %%a in ("Downloads","Downloads\Natro Macro","Desktop","Documents","OneDrive\Downloads","OneDrive\Downloads\Natro Macro","OneDrive\Desktop","OneDrive\Documents") do (
+			for %%a in ("Downloads","Downloads\nature marco","Desktop","Documents","OneDrive\Downloads","OneDrive\Downloads\nature marco","OneDrive\Desktop","OneDrive\Documents") do (
 				if exist "%%~a\!zip!" (
 					echo %cyan%Found in %%~a^^!%reset%
 					echo:
@@ -66,10 +66,10 @@ if not [!grandparent!] == [] (
 					echo %yellow%Deleted successfully^^!%reset%
 					echo:
 					
-					echo %green%Unzip complete^^! Starting Natro Macro in 10 seconds.%reset%
+					echo %green%Unzip complete^^! Starting nature marco in 10 seconds.%reset%
 					<nul set /p =%green%Press any key to skip . . . %reset%
 					timeout /t 10 >nul
-					start "" "%USERPROFILE%\%%~a\!folder!\submacros\AutoHotkey32.exe" "%USERPROFILE%\%%~a\!folder!\submacros\natro_macro.ahk"
+					start "" "%USERPROFILE%\%%~a\!folder!\submacros\nmhk32.exe" "%USERPROFILE%\%%~a\!folder!\submacros\nature_marco.ahk"
 					exit
 				)
 			)
@@ -77,10 +77,10 @@ if not [!grandparent!] == [] (
 	) else (echo %red%Error: Could not determine name of unextracted .zip^^!%reset%)
 ) else (echo %red%Error: Could not find Temp folder of unextracted .zip^^! ^(.bat has no grandparent^)%reset%)
 
-echo %red%Unable to automatically extract Natro Macro^^!%reset%
+echo %red%Unable to automatically extract nature marco^^!%reset%
 echo %red% - If you have already extracted, you are missing important files, please re-extract.%reset%
 echo %red% - If you have not extracted, you may have to manually extract the zipped folder.%reset%
-echo %red%Join our Discord server for support: discord.gg/natromacro%reset%
+echo %red%Join our Discord server for support: nil
 echo:
 <nul set /p "=%red%Press any key to exit . . . %reset%"
 pause >nul
