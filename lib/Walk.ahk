@@ -1,4 +1,4 @@
-﻿pToken := Gdip_Startup()
+pToken := Gdip_Startup()
 
 ; buff characters for stack detection
 buff_characters := Map()
